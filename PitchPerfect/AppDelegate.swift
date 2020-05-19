@@ -6,6 +6,7 @@
 //  Copyright © 2020 Mohammed Tangestani. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 
 @UIApplicationMain
@@ -15,6 +16,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Get the singleton instance.
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            // Set the audio session category, mode, and options.
+            try audioSession.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
+        } catch {
+            print("Failed to set audio session category.")
+        }
+        // You can activate the audio session at any time after setting its category,
+        // but it’s generally preferable to defer this call until your app begins audio playback.
+        // Activate using the setActive(_:) method
+        
         return true
     }
 
